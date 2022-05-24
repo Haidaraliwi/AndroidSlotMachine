@@ -11,9 +11,10 @@ import android.widget.Toast;
 
 import java.util.Random;
 
-import ImageViewScrolling.ImageViewScrolling;
+import com.zybooks.androidslotmachine.ImageViewScrolling.IEventEnd;
+import com.zybooks.androidslotmachine.ImageViewScrolling.ImageViewScrolling;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements IEventEnd {
 
     ImageView btn_up,btn_down;
     ImageViewScrolling image,image2,image3;
@@ -66,9 +67,9 @@ public class MainActivity extends AppCompatActivity  {
         });
     }
 
-    public MainActivity() {
-        super();
-    }
+    //public MainActivity() {
+       // super();}
+
 
     public void eventEnd(int result, int count) {
         if (count_done < 2) //if still slot has been rolling

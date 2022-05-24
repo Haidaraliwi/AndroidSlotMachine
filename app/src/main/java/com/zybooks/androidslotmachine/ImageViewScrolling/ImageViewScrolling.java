@@ -1,22 +1,25 @@
-package ImageViewScrolling;
+package com.zybooks.androidslotmachine.ImageViewScrolling;
 
 
 import android.animation.Animator;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.ViewGroup;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import com.zybooks.androidslotmachine.Common;
 import com.zybooks.androidslotmachine.MainActivity;
 import com.zybooks.androidslotmachine.R;
 
 
 public class ImageViewScrolling extends FrameLayout {
 
-    private static int ANIMATION_DUR = 150;
-    ImageView current_image, next_image;
+    private static final int ANIMATION_DUR = 150;
+    ImageView current_image;
+    ImageView next_image;
 
     int last_result=0,old_value=0;
 
@@ -25,10 +28,12 @@ public class ImageViewScrolling extends FrameLayout {
     public void setEventEnd(IEventEnd eventEnd) {
         this.eventEnd = eventEnd;
     }
+
     public ImageViewScrolling( Context context)  {
         super(context);
         init (context);
     }
+
     public ImageViewScrolling (Context context, AttributeSet attrs) {
         super(context, attrs);
         init (context);
@@ -42,7 +47,7 @@ public class ImageViewScrolling extends FrameLayout {
         next_image.setTranslationY(getHeight());
     }
 
-    public void setValueRandom(int image,int rotate_count)
+    public void setValueRandom(int image, int rotate_count)
     {
         current_image.animate().translationY(-getHeight()).setDuration(ANIMATION_DUR).start();
         next_image.setTranslationY(next_image.getHeight());
@@ -73,6 +78,7 @@ public class ImageViewScrolling extends FrameLayout {
                         }
                     }
 
+
                     @Override
                     public void onAnimationCancel(Animator animator) {
 
@@ -85,21 +91,25 @@ public class ImageViewScrolling extends FrameLayout {
                 });
     }
 
-    private void setImage(ImageView imageView, int value) {
+    private void onAnimationRepeat(int old_value , int last_result) {
+    }
+
+
+    private void setImage(ImageView image_View, int value) {
         if(value == Util.BAR)
-            imageView.setImageResource(R.drawable.bar_done);
+            image_View.setImageResource(R.drawable.bar_done);
         else if(value == Util.SEVEN)
-            imageView.setImageResource(R.drawable.sevent_done);
+            image_View.setImageResource(R.drawable.sevent_done);
         else if(value == Util.LEMON)
-            imageView.setImageResource(R.drawable.lemon_done);
+            image_View.setImageResource(R.drawable.lemon_done);
         else if(value == Util.ORANGE)
-            imageView.setImageResource(R.drawable.orange_done);
+            image_View.setImageResource(R.drawable.orange_done);
         else if(value == Util.TRIPLE)
-            imageView.setImageResource(R.drawable.triple_done);
+            image_View.setImageResource(R.drawable.triple_done);
         else
-            imageView.setImageResource(R.drawable.waternelon_done);
+            image_View.setImageResource(R.drawable.watermelon_done );
         //Set tage for images to compare result
-        imageView.setTag(value);
+        image_View.setTag(value);
         last_result = value;
 
 
@@ -109,6 +119,9 @@ public class ImageViewScrolling extends FrameLayout {
 
     }
 
-    public void setEventEnd(MainActivity mainActivity) {
+    private void SetImage (ImageView current_image, int i){
     }
+
+    //public void setEventEnd(MainActivity mainActivity) {}
+
 }
